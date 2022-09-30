@@ -10,7 +10,10 @@ export default async function handler(request, response) {
     });
   if (error) console.log(error);
   response.status(200).json({
-    body: data,
+    body: {
+      data,
+      supabase
+    },
     query: request.query,
     cookies: request.cookies,
   });
