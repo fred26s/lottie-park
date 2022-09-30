@@ -14,12 +14,12 @@ export default async function handler(request, response) {
       .select("username");
 
     const { data, error } = await supabase.storage
-      .from("lottie-json")
-      .list("json", {
-        limit: 100,
-        offset: 0,
-        sortBy: { column: "name", order: "asc" },
-      });
+      .getBucket("lottie-json")
+      // .list("json", {
+      //   limit: 100,
+      //   offset: 0,
+      //   sortBy: { column: "name", order: "asc" },
+      // });
     if (error) console.log(error);
     response.status(200).json({
       body: {
