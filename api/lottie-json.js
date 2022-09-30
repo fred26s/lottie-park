@@ -9,17 +9,19 @@ export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 export default async function handler(request, response) {
   try {
+    // * 入参
+
     const { data: notes, error: selectErr } = await supabase
       .from("profiles")
       .select("username");
 
-    const { data, error } = await supabase.storage
-      .getBucket("lottie-json")
-      // .list("json", {
-      //   limit: 100,
-      //   offset: 0,
-      //   sortBy: { column: "name", order: "asc" },
-      // });
+    const { data, error } = await supabase.storage.listBuckets();
+    // .getBucket("lottie-json")
+    // .list("json", {
+    //   limit: 100,
+    //   offset: 0,
+    //   sortBy: { column: "name", order: "asc" },
+    // });
     if (error) console.log(error);
     response.status(200).json({
       body: {
