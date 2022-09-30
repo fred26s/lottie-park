@@ -15,7 +15,8 @@ export default async function handler(request, response) {
       .from("profiles")
       .select("username");
 
-    const { data, error } = await supabase.storage.listBuckets();
+    const { data, error } = await supabase.storage.getPublicURL();
+    // .listBuckets();
     // .getBucket("lottie-json")
     // .list("json", {
     //   limit: 100,
