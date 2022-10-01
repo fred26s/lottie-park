@@ -27,8 +27,8 @@ export const useAsyncAnimate = async (LottieListRef, lottieWrapperRef) => {
   const lottieWrapper = unref(lottieWrapperRef);
 
   // 获取所有json内容，预览动画
-  const PromiseList = LottieList.map((e) => {
-    return axios.get(e);
+  const PromiseList = LottieList.map(({url}) => {
+    return axios.get(url);
   });
   const jsonDetailList = await fetchJson(PromiseList);
 

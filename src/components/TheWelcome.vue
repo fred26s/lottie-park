@@ -58,7 +58,7 @@ onMounted(async () => {
 
 // copy事件
 // 将jsonURL写入剪贴板
-const onCopyJson = async (lottieJsonUrl) => {
+const onCopyJson = async ({ fileName: lottieJsonUrl }) => {
   try {
     await navigator.clipboard.writeText(lottieJsonUrl);
     console.log("jsonURL copied to clipboard", lottieJsonUrl);

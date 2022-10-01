@@ -40,10 +40,19 @@ export default async function handler(request, response) {
       await supabase.storage
         .from("lottie-json")
         .createSignedUrls(fileNameList, 60);
+    
+        // * 这里默认接口返回的URL list数量，全等于上一个接口查出的所有文件数量
+    const renderDataList = signedURLList.map((url,index) => {
+      return {
+        url,
+        fileName: fileNameList[index]
+      }
+    })
     response.status(200).json({
-      data: signedURLList.map(e => e.signedURL),
+      data: renderDataList,
       body: {
         createSignedUrlsError,
+        signedURLList: signedURLList.map(e => e.signedURL),
         data,
         supabase,
         notes,
@@ -52,31 +61,6 @@ export default async function handler(request, response) {
       query: request.query,
       cookies: request.cookies,
     });
-    // } else if (type == 2) {
-    //   const { signedURL, error } = await supabase.storage
-    //     .from("lottie-json")
-    //     .createSignedUrl("json/lottie-1.json", 60);
-    //   response.status(200).json({
-    //     body: {
-    //       error,
-    //       signedURL,
-    //     },
-    //     query: request.query,
-    //     cookies: request.cookies,
-    //   });
-    // } else if (type == 3) {
-    //   const { publicURL, error } = await supabase.storage
-    //     .from("lottie-json")
-    //     .getPublicUrl(`json/${fileName}`);
-    //   response.status(200).json({
-    //     body: {
-    //       error,
-    //       publicURL,
-    //     },
-    //     query: request.query,
-    //     cookies: request.cookies,
-    //   });
-    // }
   } catch (err) {
     console.log(`handler err: ${err}`);
   }
