@@ -1,0 +1,5 @@
+{
+  "rewrites": [
+    { "source": "/lottie-json", "destination": "/api/lottie-json" }
+  ]
+}

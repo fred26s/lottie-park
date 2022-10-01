@@ -9,7 +9,7 @@ export const useFetchAnimateList = async () => {
   let LottieList = ref([]);
 
   //* 通过接口获取jsonList
-  const jsonList = await axios.get("/lottie-json/list");
+  const jsonList = await axios.get("/lottie-json");
   // 列表循环展示
   LottieList.value = jsonList.data;
   return { LottieList };
