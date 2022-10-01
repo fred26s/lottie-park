@@ -21,7 +21,7 @@ export default async function handler(request, response) {
     // * 这里默认接口返回的URL list数量，全等于上一个接口查出的所有文件数量
     const renderDataList = signedURLList.map((url, index) => {
       return {
-        url: url.map((e) => e.signedURL),
+        url: url,
         fileName: fileNameList[index],
       };
     });
