@@ -13,10 +13,7 @@ export default async function handler(request, response) {
         data: signedURLList,
         body: {
           createSignedUrlsError,
-          data,
           supabase,
-          notes,
-          selectErr,
         },
         query: request.query,
         cookies: request.cookies,
