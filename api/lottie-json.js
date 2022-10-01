@@ -6,9 +6,10 @@ export default async function handler(request, response) {
     const { query } = request;
     const { type, fileName } = query;
     if (type == 1) {
-      const { signedURLList, createSignedUrlsError } = await supabase.storage
-        .from("lottie-json")
-        .createSignedUrls(['json/lottie-1.json', 'json/lottie-2.json'], 60);
+      const { data: signedURLList, error: createSignedUrlsError } =
+        await supabase.storage
+          .from("lottie-json")
+          .createSignedUrls(["json/lottie-1.json", "json/lottie-2.json"], 60);
       response.status(200).json({
         data: signedURLList,
         body: {
@@ -35,9 +36,10 @@ export default async function handler(request, response) {
     const fileNameList = data.map((e) => `json/${e.name}`);
 
     // 批量获取资源URL
-    const { signedURLList, createSignedUrlsError } = await supabase.storage
-      .from("lottie-json")
-      .createSignedUrls(fileNameList, 60);
+    const { data: signedURLList, error: createSignedUrlsError } =
+      await supabase.storage
+        .from("lottie-json")
+        .createSignedUrls(fileNameList, 60);
     response.status(200).json({
       data: signedURLList,
       body: {
