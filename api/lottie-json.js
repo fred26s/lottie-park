@@ -16,12 +16,12 @@ export default async function handler(request, response) {
     const { data: signedURLList, error: createSignedUrlsError } =
       await supabase.storage
         .from("lottie-json")
-        .createSignedUrls(fileNameList, 60);
+        .createSignedUrls(fileNameList, 300);
 
     // * 这里默认接口返回的URL list数量，全等于上一个接口查出的所有文件数量
-    const renderDataList = signedURLList.map((url, index) => {
+    const renderDataList = signedURLList.map(({signedURL}, index) => {
       return {
-        url: url,
+        url: signedURL,
         fileName: fileNameList[index],
       };
     });
