@@ -41,7 +41,7 @@ export default async function handler(request, response) {
         .from("lottie-json")
         .createSignedUrls(fileNameList, 60);
     response.status(200).json({
-      data: signedURLList,
+      data: signedURLList.map(e => e.signedURL),
       body: {
         createSignedUrlsError,
         data,
